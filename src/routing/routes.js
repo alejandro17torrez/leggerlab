@@ -1,13 +1,9 @@
-import {render} from "react-dom";
-
 export function Home(props) {        
-        return(
-            <div className="wrapper">
-            <h1>Subsidios List</h1>
-                <ul>
-                    {props.list.map(subsidio => <li key={subsidio.slug}><li>{subsidio.name}</li><ul>{subsidio.child.map(child => <li key={child.slug}>{child.name} {child.parent}</li>)}</ul></li>)}
-                </ul>
-            </div>
+  return(
+    <div className="wrapper">
+        <h1>Subsidios List</h1>
+        <List list={props.list} />            
+    </div>
   );
    
 }
@@ -20,7 +16,22 @@ export function Users() {
   return <h2>Users</h2>;
 }
 
+function List(props)
+{
+    return(
+        <ul>
+            {props.list.map(subsidio => <li key={subsidio.slug}><li>{subsidio.id} | {subsidio.name} | {subsidio.parent}: {<Child list = {subsidio.child}/>}</li></li>)}
+        </ul>
+    )
+}
 
-
+function Child(props)
+{
+     return(
+        <ul>
+            {props.list.map(subsidio => <li key={subsidio.slug}><li>{subsidio.id} - {subsidio.name} - {subsidio.parent }</li></li>)}
+        </ul>
+    )
+}
 
 
