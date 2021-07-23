@@ -1,19 +1,24 @@
+import {Carousel} from "bootstrap";
+import {render} from "react-dom";
+
 export function Home(props) {        
-  return(
-    <div className="wrapper">
-        <h1>Subsidios List</h1>
-        <List list={props.list} />            
-    </div>
-  );
-   
+    render(<ControlledCarousel banner={props.banner} />)
+    return(
+        <div className="wrapper">
+                
+            <h1>Subsidios List</h1>
+            <List list={props.list} />            
+        </div>
+    );
 }
 
-export function About() {
-  return <h2>About</h2>;
+export function About(props) {
+    return <h2>About</h2>;
+ 
 }
 
 export function Users() {
-  return <h2>Users</h2>;
+  return <h2>Users</h2>
 }
 
 function List(props)
@@ -34,4 +39,19 @@ function Child(props)
     )
 }
 
-
+function ControlledCarousel(props) {   
+    return (
+        <Carousel>
+        {props.banner.custom_fields.slider.map( e =>
+            <Carousel.Item>
+              <img
+                className="d-block w-100"
+                src={e.url}
+                alt={e.titulo}
+              />
+            </Carousel.Item>
+        )}
+      </Carousel>
+    );
+  }
+  
